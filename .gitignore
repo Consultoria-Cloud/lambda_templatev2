@@ -1,0 +1,25 @@
+# Arquivos de configuração Terraform
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# Arquivos de log e debug
+terraform.log
+state/*.tfstate*
+
+# Diretórios de arquivos temporários
+.terraform/
+.tfplan
+
+# Arquivos de cache
+*.tfplan.cache
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Outros
+.DS_Store
+Thumbs.db

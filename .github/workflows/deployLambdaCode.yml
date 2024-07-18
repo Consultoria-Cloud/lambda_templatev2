@@ -1,0 +1,38 @@
+name: deploy code lambda
+
+on:
+  workflow_dispatch: {}
+    
+jobs:
+  
+  dev:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+            aws-region: us-east-1
+
+        - name: Install zip tool
+          uses: montudor/action-zip@v1
+
+        - name: Create Zip file for Lambda Function 
+          run: zip -r code.zip .
+
+        - name: Deploy to AWS Lambda
+          run: |
+              git config --get remote.origin.url 
+              repo_url=$(git config --get remote.origin.url)
+              repo_name=$(basename -s .git "$repo_url")
+              echo $repo_name
+
+              aws lambda update-function-code \
+              --function-name $repo_name \
+              --zip-file=fileb://code.zip
