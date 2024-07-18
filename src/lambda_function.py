@@ -5,7 +5,7 @@ def lambda_handler(event, context):
     # TODO implement
     return {
         'statusCode': 200,
-        'body': json.dumps('Hello from Lambda! - Version Lambda 1.1.2')
+        'body': json.dumps('Hello from Lambda! - Version Lambda 1.1.3')
     }
 
 if __name__ == "__name__":
