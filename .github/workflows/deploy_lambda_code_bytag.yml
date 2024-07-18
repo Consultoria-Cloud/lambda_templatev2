@@ -21,7 +21,7 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v2
           with:
-            ref: ref/tags/${{ github.ref_name }}
+            ref: ${{ github.ref_name }}
 
         - name: Configure AWS Credentials
           uses: aws-actions/configure-aws-credentials@v1
