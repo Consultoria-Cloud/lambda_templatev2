@@ -34,6 +34,7 @@ jobs:
 
     - name: Plan Terraform DEV
       run: |
+        cd terraform
         git config --get remote.origin.url
         repo_url=$(git config --get remote.origin.url)
         repo_name=$(basename -s .git "$repo_url")
@@ -41,4 +42,6 @@ jobs:
         terraform plan -var="github_repo=$repo_name" -out=devtfplan
 
     - name: Apply Terraform DEV
-      run: terraform apply devtfplan
+      run: |
+        cd terraform
+        terraform apply devtfplan
