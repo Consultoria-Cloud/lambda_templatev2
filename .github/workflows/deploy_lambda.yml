@@ -7,7 +7,7 @@ jobs:
   terraform:
     name: Deploy a ${{ github.ref_name }} Lambda
     runs-on: ubuntu-latest
-    environment: dev
+    environment: ${{ github.ref_name }}
 
     steps:
     - name: Checkout code
