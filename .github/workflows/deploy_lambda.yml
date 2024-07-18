@@ -30,7 +30,7 @@ jobs:
     - name: Initialize Terraform
       run: |
         cd terraform
-        terraform init -backend-config="dev_backend.hcl"
+        terraform init -backend-config="./dev_backend.hcl"
 
     # - name: Plan Terraform DEV
     #   run: |
