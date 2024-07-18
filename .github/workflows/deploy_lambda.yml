@@ -26,21 +26,21 @@ jobs:
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: us-east-1
 
-    - name: Initialize Terraform
+    - name: Initialize Terraform ${{ github.ref_name }} environment
       run: |
         cd terraform
         terraform init -backend-config=dev.tfbackend
 
-    - name: Plan Terraform DEV
+    - name: Plan Terraform ${{ github.ref_name }} environment
       run: |
         cd terraform
         git config --get remote.origin.url
         repo_url=$(git config --get remote.origin.url)
         repo_name=$(basename -s .git "$repo_url")
         echo $repo_name
-        terraform plan -var="github_repo=$repo_name" -out=devtfplan
+        terraform plan -var="github_repo=$repo_name" -out=tfplan
 
-    - name: Apply Terraform DEV
+    - name: Apply Terraform ${{ github.ref_name }} environment
       run: |
         cd terraform
-        terraform apply devtfplan
+        terraform apply tfplan
