@@ -28,7 +28,7 @@ jobs:
         aws-region: us-east-1
 
     - name: Initialize Terraform
-      run: terraform init -chdir=terraform -backend-config=dev.tfbackend"
+      run: terraform init -chdir=terraform -backend-config="dev.tfbackend"
 
     # - name: Plan Terraform DEV
     #   run: |
