@@ -1,4 +1,4 @@
-name: Deploy Lambda Code
+name: Deploy Lambda Code by Tags
 
 on:
   workflow_dispatch:
