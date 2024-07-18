@@ -1,13 +1,22 @@
 name: Deploy Lambda Code
 
 on:
-  workflow_dispatch: {}
-    
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "The environment for deploy"
+        required: true
+        type: choice
+        options:
+          - dev
+          - hml
+          - prd
+
 jobs:
   
   dev:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: ${{ inputs.environment }}
     steps:
         - name: Checkout
           uses: actions/checkout@v2
