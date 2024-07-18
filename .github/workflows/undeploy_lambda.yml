@@ -1,13 +1,13 @@
 name: Undeploy Lambda
 
 on:
-
   workflow_dispatch:
 
 jobs:
   terraform:
-    name: Undeploy
+    name: Undeploy a ${{ github.ref_name }} Lambda
     runs-on: ubuntu-latest
+    environment: dev
 
     steps:
     - name: Checkout code
@@ -27,10 +27,13 @@ jobs:
         aws-region: us-east-1
 
     - name: Initialize Terraform
-      run: terraform init
-
-    - name: Plan Terraform
       run: |
+        cd terraform
+        terraform init -backend-config=dev.tfbackend
+
+    - name: Plan Terraform DEV
+      run: |
+        cd terraform
         git config --get remote.origin.url
         repo_url=$(git config --get remote.origin.url)
         repo_name=$(basename -s .git "$repo_url")
@@ -38,4 +41,6 @@ jobs:
         terraform plan -destroy -var="github_repo=$repo_name" -out=tfplan
 
     - name: Apply Terraform
-      run: terraform apply tfplan
+      run: |
+        cd terraform
+        terraform apply tfplan
