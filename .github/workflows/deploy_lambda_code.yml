@@ -1,4 +1,4 @@
-name: deploy code lambda
+name: Deploy Lambda Code
 
 on:
   workflow_dispatch: {}
