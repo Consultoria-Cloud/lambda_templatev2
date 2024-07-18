@@ -32,13 +32,13 @@ jobs:
         cd terraform
         terraform init -backend-config=dev.tfbackend
 
-    # - name: Plan Terraform DEV
-    #   run: |
-    #     git config --get remote.origin.url
-    #     repo_url=$(git config --get remote.origin.url)
-    #     repo_name=$(basename -s .git "$repo_url")
-    #     echo $repo_name
-    #     terraform plan -var="github_repo=$repo_name" -out=devtfplan
+    - name: Plan Terraform DEV
+      run: |
+        git config --get remote.origin.url
+        repo_url=$(git config --get remote.origin.url)
+        repo_name=$(basename -s .git "$repo_url")
+        echo $repo_name
+        terraform plan -var="github_repo=$repo_name" -out=devtfplan
 
-    # - name: Apply Terraform DEV
-    #   run: terraform apply devtfplan
+    - name: Apply Terraform DEV
+      run: terraform apply devtfplan
