@@ -1,7 +1,6 @@
 name: Deploy Lambda
 
 on:
-
   workflow_dispatch:
 
 jobs:
