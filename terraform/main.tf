@@ -2,6 +2,10 @@ provider "aws" {
   region = "us-east-1" # Substitua pela sua região
 }
 
+terraform {
+  backend "s3" {}
+}
+
 # Role da Lambda
 resource "aws_iam_role" "lambda_role" {
   name = "${var.github_repo}_lambda_role"
